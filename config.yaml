@@ -1,0 +1,27 @@
+log:
+  loglevel: info
+dns:
+  servers:
+  - https+local://8.8.8.8/dns-query
+inbounds:
+- port: 61081
+  protocol: shadowsocks
+  settings:
+    password: "uuid"
+    method: aes-128-gcm
+    ivcheck: true
+  streamSettings:
+    network: ws
+    wsSettings:
+      path: /
+  sniffing:
+    enabled: true
+    destOverride:
+    - http
+    - tls
+    - quic
+outbounds:
+- protocol: freedom
+  tag: direct
+  settings:
+    domainStrategy: UseIPv4
